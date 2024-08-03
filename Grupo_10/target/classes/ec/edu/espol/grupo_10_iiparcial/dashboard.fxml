@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.DashboardController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="42.0" prefWidth="700.0" style="-fx-background-color: #2e3158;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label graphicTextGap="0.0" layoutX="662.0" layoutY="3.0" onMouseClicked="#fnClose" text="❎" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <bottom>
+            <AnchorPane fx:id="MainScreen" prefHeight="562.0" prefWidth="700.0" style="-fx-background-color: #fafbf6;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="imvAnimalQuiz" fitHeight="273.0" fitWidth="308.0" layoutX="214.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutX="194.0" layoutY="26.0" text="SAFARI DE PREGUNTAS" textAlignment="JUSTIFY" textFill="#d23417">
+                     <font>
+                        <Font name="Cambria Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="95.0" layoutY="62.0" text="ADIVINAREMOS LO QUE PIENSAS" textAlignment="JUSTIFY" textFill="#2e3158">
+                     <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="41.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="252.0" layoutY="400.0" text="Piensa en un animal">
+                     <font>
+                        <Font name="Arial Narrow" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="235.0" layoutY="425.0" text="¡Pero no digas cuál es!">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="267.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#fnPlay" prefHeight="35.0" prefWidth="147.0" style="-fx-background-color: #191840;" text="Empecemos" textFill="WHITE">
+                     <font>
+                        <Font name="Tw Cen MT" size="19.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+      <AnchorPane fx:id="SecondScreen" layoutY="40.8" prefHeight="564.0" prefWidth="700.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+         <children>
+            <ImageView fx:id="imvQuestions" fitHeight="278.0" fitWidth="253.0" layoutX="387.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="61.0" layoutY="191.0" prefHeight="24.0" prefWidth="253.0" text="Indícanos cuántas preguntas">
+               <font>
+                  <Font name="Tw Cen MT" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="61.0" layoutY="215.0" prefHeight="24.0" prefWidth="216.0" text="podemos hacerte ₊˚⌒⌒">
+               <font>
+                  <Font name="Tw Cen MT" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="244.0" layoutY="46.0" text="ִֶָ𓂃 ࣪˖ ִֶָ🐇་༘࿐" textFill="#191840">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNQuestions" layoutX="61.0" layoutY="259.0" prefHeight="38.0" prefWidth="254.0" />
+            <Button layoutX="61.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#fnPlayAgain" prefHeight="34.0" prefWidth="253.0" style="-fx-background-color: #191840;" text="Juguemos" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="PlayScreen" layoutY="41.0" prefHeight="566.0" prefWidth="700.0" visible="false">
+         <children>
+            <Label layoutX="143.0" layoutY="38.0" text="¡ES HORA DE ADIVINAR!" textFill="#191840">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="45.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imvAnswers" fitHeight="266.0" fitWidth="275.0" layoutX="37.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblQuestions" layoutX="351.0" layoutY="251.0" prefHeight="26.0" prefWidth="311.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnYes" layoutX="397.0" layoutY="288.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="Sí" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnNo" layoutX="520.0" layoutY="288.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="197.0" layoutY="88.0" text="¿Estás preparado para perder?">
+               <font>
+                  <Font name="Tw Cen MT" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="357.0" layoutY="38.0" text=" ADIVINAR" textFill="#e11616">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="45.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

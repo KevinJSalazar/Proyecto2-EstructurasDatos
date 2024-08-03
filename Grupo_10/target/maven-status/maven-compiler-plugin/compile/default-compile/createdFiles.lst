@@ -1,0 +1,4 @@
+module-info.class
+ec\edu\espol\grupo_10_iiparcial\App.class
+ec\edu\espol\controllers\DashboardController.class
+ec\edu\espol\util\Util.class
