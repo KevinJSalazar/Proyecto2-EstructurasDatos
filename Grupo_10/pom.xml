@@ -23,9 +23,8 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>17-ea+12</version>
+            <version>23-ea+22</version>
             <type>jar</type>
-            <classifier>linux</classifier>
         </dependency>
         <dependency>
             <groupId>org.jfxcore</groupId>
