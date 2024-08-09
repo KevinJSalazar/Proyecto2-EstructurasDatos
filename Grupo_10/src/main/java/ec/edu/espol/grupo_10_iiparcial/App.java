@@ -86,10 +86,10 @@ public class App extends Application {
         System.out.println(arbol.recorridoPreOrden());
         
         List<String> respuestasUsuario = new ArrayList<>();
-        respuestasUsuario.add("si");
+        respuestasUsuario.add("NoInfo");
         respuestasUsuario.add("no");
-        respuestasUsuario.add("si");
-        List<String> posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario);
+        respuestasUsuario.add("NoInfo");
+        List<String> posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario, 0);
         for(String posRep : posiblesRespuestas){
             System.out.println(posRep);
         }
