@@ -54,7 +54,7 @@ public class CrearArbol {
     
     public static List<String> leerPreguntas(){
         ArrayList<String> preguntas = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File("preguntas.txt"))){
+        try(Scanner sc = new Scanner(new File("archivos\\preguntas.txt"))){
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 preguntas.add(linea);
@@ -67,7 +67,7 @@ public class CrearArbol {
     
     public static HashMap<String, List<String>> leerRespuestas(){
     HashMap<String, List<String>> respuestas = new HashMap<String, List<String>>();
-        try(Scanner sc = new Scanner(new File("respuestas.txt"))){
+        try(Scanner sc = new Scanner(new File("archivos\\respuestas.txt"))){
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 String[] data = linea.split(" ");
