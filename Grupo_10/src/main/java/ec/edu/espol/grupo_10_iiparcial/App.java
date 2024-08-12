@@ -93,7 +93,7 @@ public class App extends Application {
         for(String posRep : posiblesRespuestas){
             System.out.println(posRep);
         }
-//        launch();
+        launch();
     }
 
 }
