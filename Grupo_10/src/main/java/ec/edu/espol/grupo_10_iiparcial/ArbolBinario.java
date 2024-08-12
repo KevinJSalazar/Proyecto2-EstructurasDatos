@@ -95,22 +95,31 @@ public class ArbolBinario<E extends Comparable<E>>{
         return recorrido;
     }
     
-    public List<E> respuestasPorRecorrido(List<E> respuestas){
+    public List<E> respuestasPorRecorrido(List<E> respuestas, int indice){
         ArrayList<E> posiblesRespuesta = new ArrayList<>();
         if(this.esHoja()){
             posiblesRespuesta.add(this.raiz.contenido);
             return posiblesRespuesta;
         }
-        else if(respuestas.isEmpty()){
-            posiblesRespuesta.addAll(this.buscarHojas());
-            return posiblesRespuesta;
-        }
-        E respSiNo = respuestas.remove(0);
+//        else if(respuestas.isEmpty()){
+//            posiblesRespuesta.addAll(this.buscarHojas());
+//            return posiblesRespuesta;
+//        }
+        E respSiNo = respuestas.get(indice);
         List<E> posRes = new ArrayList<E>();
         if(respSiNo.equals("si") && this.raiz.izq!=null)
-            posRes = this.raiz.izq.respuestasPorRecorrido(respuestas);
+            posRes = this.raiz.izq.respuestasPorRecorrido(respuestas, indice + 1);
         if(respSiNo.equals("no") && this.raiz.der!=null)
-            posRes = this.raiz.der.respuestasPorRecorrido(respuestas);
+            posRes = this.raiz.der.respuestasPorRecorrido(respuestas, indice + 1);
+        if(respSiNo.equals("NoInfo")){
+            if(this.raiz.izq!=null){
+                posRes = this.raiz.izq.respuestasPorRecorrido(respuestas, indice + 1);
+            } if(this.raiz.der!=null){
+                List<E> posRes2 = this.raiz.der.respuestasPorRecorrido(respuestas, indice + 1);
+                if(posRes2 != null)
+                posiblesRespuesta.addAll(posRes2);
+            }
+        }
         if(posRes != null)
             posiblesRespuesta.addAll(posRes);
         else
@@ -118,16 +127,39 @@ public class ArbolBinario<E extends Comparable<E>>{
         return posiblesRespuesta;
     }
     
-    public List<E> buscarHojas(){
-        if(this.isEmpty())
-            return null;
-        ArrayList<E> hojas = new ArrayList<>();
-        if(this.esHoja())
-            hojas.add(this.raiz.contenido);
-        if(this.raiz.izq!=null) hojas.addAll(this.raiz.izq.buscarHojas());
-        if(this.raiz.der!=null) hojas.addAll(this.raiz.der.buscarHojas());
-        return hojas;
-    }
+//    public List<E> respuestasPorRecorrido(List<E> respuestas){
+//        ArrayList<E> posiblesRespuesta = new ArrayList<>();
+//        if(this.esHoja()){
+//            posiblesRespuesta.add(this.raiz.contenido);
+//            return posiblesRespuesta;
+//        }
+//        else if(respuestas.isEmpty()){
+//            posiblesRespuesta.addAll(this.buscarHojas());
+//            return posiblesRespuesta;
+//        }
+//        E respSiNo = respuestas.remove(0);
+//        List<E> posRes = new ArrayList<E>();
+//        if(respSiNo.equals("si") && this.raiz.izq!=null)
+//            posRes = this.raiz.izq.respuestasPorRecorrido(respuestas);
+//        if(respSiNo.equals("no") && this.raiz.der!=null)
+//            posRes = this.raiz.der.respuestasPorRecorrido(respuestas);
+//        if(posRes != null)
+//            posiblesRespuesta.addAll(posRes);
+//        else
+//            return null;
+//        return posiblesRespuesta;
+//    }
+    
+//    public List<E> buscarHojas(){
+//        if(this.isEmpty())
+//            return null;
+//        ArrayList<E> hojas = new ArrayList<>();
+//        if(this.esHoja())
+//            hojas.add(this.raiz.contenido);
+//        if(this.raiz.izq!=null) hojas.addAll(this.raiz.izq.buscarHojas());
+//        if(this.raiz.der!=null) hojas.addAll(this.raiz.der.buscarHojas());
+//        return hojas;
+//    }
     
     public void añadirHojas(E hoja, List<E> recorrido){
         E camino = recorrido.remove(0);

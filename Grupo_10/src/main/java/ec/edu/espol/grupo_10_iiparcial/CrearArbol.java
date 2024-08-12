@@ -28,20 +28,6 @@ public class CrearArbol {
             crearArbolDeDecisiones(arbol.getNodoDer(), preguntas, indice + 1);
         }
     }
-
-    
-//    public static void crearArbolDeDecisiones(ArbolBinario<String> arbol, ArrayList<String> preguntas){
-//        arbol.setContenido(preguntas.get(0));
-//        int i = 1;
-//        do{
-//            String sigPregunta = preguntas.get(i);
-//            if(arbol.getNodoIzq()==null)
-//                arbol.getNodoIzq().setContenido(sigPregunta);
-//            if(arbol.getNodoDer()==null)
-//                arbol.getNodoDer().setContenido(sigPregunta);
-//            i++;
-//        }while(i < preguntas.size());
-//    }
     
     public static void añadirAnimales(ArbolBinario<String> arbol, HashMap<String, List<String>> respuestas){
         for(String animal : respuestas.keySet()){
@@ -51,9 +37,24 @@ public class CrearArbol {
         }
     }
     
+    public static int getIndicePregunta(List<String> preguntas, String pregunta){
+        for(int i = 0; i < preguntas.size(); i++){
+            if(preguntas.get(i).equals(pregunta))
+                return i;
+        }
+        return -1;
+    }
+    
+    public static List<String> crearListaRespuesta(int tamaño){
+        ArrayList<String> respuestasUsuario = new ArrayList<>();
+        for(int i = 0; i < tamaño; i++)
+            respuestasUsuario.add("NoInfo");
+        return respuestasUsuario;
+    }
+    
     public static List<String> leerPreguntas(){
         ArrayList<String> preguntas = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File("preguntas.txt"))){
+        try(Scanner sc = new Scanner(new File("archivos\\preguntas.txt"))){
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 preguntas.add(linea);
@@ -66,7 +67,7 @@ public class CrearArbol {
     
     public static HashMap<String, List<String>> leerRespuestas(){
     HashMap<String, List<String>> respuestas = new HashMap<String, List<String>>();
-        try(Scanner sc = new Scanner(new File("respuestas.txt"))){
+        try(Scanner sc = new Scanner(new File("archivos\\respuestas.txt"))){
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 String[] data = linea.split(" ");

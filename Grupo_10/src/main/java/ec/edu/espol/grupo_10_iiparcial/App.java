@@ -62,20 +62,23 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        HashMap<String, List<String>> respuestas = new HashMap<String, List<String>>();
-        String[] animales = {"Oso", "Lechuza", "Venado", "Paloma", "Goku"};
-        String[][] respSiNo = {{"si", "si" ,"si"}, {"no", "si" ,"no"}, {"si", "no" ,"si"}, {"no", "no" ,"no"}, {"no", "si" ,"si"}};
-        for(int i = 0; i < 5; i++){
-            respuestas.put(animales[i], new ArrayList<>());
-            for(int j = 0; j < 3; j++){
-                respuestas.get(animales[i]).add(respSiNo[i][j]);
-            }
-            System.out.println(animales[i]);
-            System.out.println(respuestas.get(animales[i]));
-        }
         
+        // obteniendo datos de los archivos
+        HashMap<String, List<String>> respuestas= CrearArbol.leerRespuestas();
+//        HashMap<String, List<String>> respuestas = new HashMap<String, List<String>>();
+//        String[] animales = {"Oso", "Lechuza", "Venado", "Paloma", "Goku"};
+//        String[][] respSiNo = {{"si", "si" ,"si"}, {"no", "si" ,"no"}, {"si", "no" ,"si"}, {"no", "no" ,"no"}, {"no", "si" ,"si"}};
+//        for(int i = 0; i < 5; i++){
+//            respuestas.put(animales[i], new ArrayList<>());
+//            for(int j = 0; j < 3; j++){
+//                respuestas.get(animales[i]).add(respSiNo[i][j]);
+//            }
+//            System.out.println(animales[i]);
+//            System.out.println(respuestas.get(animales[i]));
+//        }
+        List<String> arregloPreguntas = CrearArbol.leerPreguntas();
         ArrayList<String> preguntas = new ArrayList<>();
-        String[] arregloPreguntas = {"¿Es este animal un mamífero?", "¿Es este animal un carnívoro?", "¿Se para este animal en 4 patas?"};
+//        String[] arregloPreguntas = {"¿Es este animal un mamífero?", "¿Es este animal un carnívoro?", "¿Se para este animal en 4 patas?"};
         for(String pregunta : arregloPreguntas){
             preguntas.add(pregunta);
         }
@@ -86,10 +89,10 @@ public class App extends Application {
         System.out.println(arbol.recorridoPreOrden());
         
         List<String> respuestasUsuario = new ArrayList<>();
-        respuestasUsuario.add("si");
+        respuestasUsuario.add("NoInfo");
         respuestasUsuario.add("no");
-        respuestasUsuario.add("si");
-        List<String> posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario);
+        respuestasUsuario.add("NoInfo");
+        List<String> posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario, 0);
         for(String posRep : posiblesRespuestas){
             System.out.println(posRep);
         }
