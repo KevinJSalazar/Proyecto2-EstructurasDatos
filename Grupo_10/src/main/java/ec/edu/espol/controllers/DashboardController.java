@@ -52,6 +52,8 @@ public class DashboardController implements Initializable {
     private Button btnYes;
     @FXML
     private Button btnNo;
+    @FXML
+    private AnchorPane GameOverSection;
 
     
     /**
@@ -111,6 +113,7 @@ public class DashboardController implements Initializable {
                     }
 
                     nQuestions = Integer.parseInt(nUser);
+                    fnGame();
                 }
             } else{
                 Util.generarAlertaError("DEMASIADAS PREGUNTAS", "¡Nunca terminaríamos de jugar si escoges un número tan grande!");
@@ -118,6 +121,22 @@ public class DashboardController implements Initializable {
         } else{
             Util.generarAlertaError("INGRESO INVÁLIDO", "¡Vamos, no podremos jugar si no te lo tomas en serio!");
         }
+    }
+    
+    private void fnGame(){
+        btnYes.setOnAction(e -> {
+            // Aquí van acciones
+            Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
+        });
+        
+        btnNo.setOnAction(e -> {
+            // Aquí van acciones
+            Util.generarAlertaError("Prueba y error", "Prueba de presionar No");
+        });
+    }
+
+    @FXML
+    private void fnMachinePlay(MouseEvent event) {
     }
     
     
