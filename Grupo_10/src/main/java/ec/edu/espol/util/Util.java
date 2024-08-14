@@ -39,7 +39,7 @@ public class Util {
         vistaPrevia.setFitWidth(ancho);
         vistaPrevia.setFitHeight(alto);
         return vistaPrevia.snapshot(null, null);
-    }
+    }         
  
     public static MediaPlayer initMediaPlayer(String nombreAudio) {
         MediaPlayer mediaPlayer = null;
@@ -94,4 +94,5 @@ public class Util {
         alerta.setHeaderText(null);
         alerta.show();
     }
+
 }

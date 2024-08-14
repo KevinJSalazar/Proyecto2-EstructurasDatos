@@ -35,11 +35,7 @@ public class DashboardController implements Initializable {
     private File imgFile;
     private MediaPlayer mediaPlayer;
     private int nQuestions;
-    
-    private HashMap<String, List<String>> respuestas;
-    private List<String> arregloPreguntas;
-    private ArrayList<String> preguntas;
-    private ArbolBinario arbol;
+
     private List<String> respuestasUsuario;
     // 
     
@@ -65,6 +61,11 @@ public class DashboardController implements Initializable {
     private Button btnNo;
     @FXML
     private AnchorPane GameOverSection;
+    @FXML
+    private AnchorPane PlayZoneScreen;
+    @FXML
+    private ImageView imvPrest;
+    
 
     
     /**
@@ -77,21 +78,17 @@ public class DashboardController implements Initializable {
         Util.mostrarImagen("logoQuiz.png", imgFile, imvAnimalQuiz);
         Util.mostrarImagen("logoQuestions.png", imgFile, imvQuestions);
         Util.mostrarImagen("logoAnswers.png", imgFile, imvAnswers);
+        Util.mostrarImagen("logoConsola.png", imgFile, imvPrest);
+        
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.dispose();
         }
         
-//        respuestas= CrearArbol.leerRespuestas();
-//        arregloPreguntas = CrearArbol.leerPreguntas();
-//        preguntas = new ArrayList<>();
-//        for(String pregunta : arregloPreguntas){
-//            preguntas.add(pregunta);
-//        }
-//        
-//        arbol = new ArbolBinario<String>(preguntas.get(0));
-//        CrearArbol.crearArbolDeDecisiones(arbol, preguntas, 1);
-//        CrearArbol.añadirAnimales(arbol, respuestas);
+        mediaPlayer = Util.initMediaPlayer("pistaConsola.mp3");
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
         respuestasUsuario = new ArrayList<>();
     }    
 
@@ -108,6 +105,12 @@ public class DashboardController implements Initializable {
         MainScreen.setVisible(false);
         SecondScreen.setVisible(true);
         PlayScreen.setVisible(false);
+        
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+        }
+        
         mediaPlayer = Util.initMediaPlayer("Pista.mp3");
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
@@ -136,6 +139,8 @@ public class DashboardController implements Initializable {
                     }
 
                     nQuestions = Integer.parseInt(nUser);
+                    // Probando que se presente algo en el label
+                    lblQuestions.setText("Hola, debería ser una pregunta.");
                     fnGame();
                     
                     
@@ -158,12 +163,16 @@ public class DashboardController implements Initializable {
         btnYes.setOnAction(e -> {
             // Aquí van acciones
             Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
+            // Otra comprobación
+            lblQuestions.setText("Holi, soy el botón sí siendo aplastado");
             respuestasUsuario.add("si");
         });
         
         btnNo.setOnAction(e -> {
             // Aquí van acciones
             Util.generarAlertaError("Prueba y error", "Prueba de presionar No");
+            // Otra comprobación
+            lblQuestions.setText("Holi, soy el botón no siendo aplastado");
             respuestasUsuario.add("no");
         });
     }
@@ -172,7 +181,45 @@ public class DashboardController implements Initializable {
     @FXML
     private void fnMachinePlay(MouseEvent event) {
     }
+
+    @FXML
+    private void fnSafariQuestions(MouseEvent event) {
+        PlayZoneScreen.setVisible(false);
+        MainScreen.setVisible(true);
+        SecondScreen.setVisible(false);
+        PlayScreen.setVisible(false);
+        
+    }
+
+    @FXML
+    private void fnMachineGame(MouseEvent event) {
+    }
+
+    @FXML
+    private void fnAddAnimal(MouseEvent event) {
+    }
+
+    @FXML
+    private void fnReturn(MouseEvent event) {
+        PlayZoneScreen.setVisible(true);
+        MainScreen.setVisible(false);
+        SecondScreen.setVisible(false);
+        PlayScreen.setVisible(false);
+        clear();
+        
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+        }
+        
+        mediaPlayer = Util.initMediaPlayer("pistaConsola.mp3");
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+    }
     
-    
-    
+    public void clear(){
+        lblQuestions.setText("Hola, debo ser una pregunta.");
+        txtNQuestions.setText("");
+        nQuestions = 0;
+    }   
 }
