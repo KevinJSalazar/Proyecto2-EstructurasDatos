@@ -4,9 +4,14 @@
  */
 package ec.edu.espol.controllers;
 
+import ec.edu.espol.grupo_10_iiparcial.ArbolBinario;
+import ec.edu.espol.grupo_10_iiparcial.CrearArbol;
 import ec.edu.espol.util.Util;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +35,12 @@ public class DashboardController implements Initializable {
     private File imgFile;
     private MediaPlayer mediaPlayer;
     private int nQuestions;
+    
+    private HashMap<String, List<String>> respuestas;
+    private List<String> arregloPreguntas;
+    private ArrayList<String> preguntas;
+    private ArbolBinario arbol;
+    private List<String> respuestasUsuario;
     // 
     
     @FXML
@@ -69,7 +80,19 @@ public class DashboardController implements Initializable {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.dispose();
-        }   
+        }
+        
+//        respuestas= CrearArbol.leerRespuestas();
+//        arregloPreguntas = CrearArbol.leerPreguntas();
+//        preguntas = new ArrayList<>();
+//        for(String pregunta : arregloPreguntas){
+//            preguntas.add(pregunta);
+//        }
+//        
+//        arbol = new ArbolBinario<String>(preguntas.get(0));
+//        CrearArbol.crearArbolDeDecisiones(arbol, preguntas, 1);
+//        CrearArbol.añadirAnimales(arbol, respuestas);
+        respuestasUsuario = new ArrayList<>();
     }    
 
     @FXML
@@ -114,6 +137,8 @@ public class DashboardController implements Initializable {
 
                     nQuestions = Integer.parseInt(nUser);
                     fnGame();
+                    
+                    
                 }
             } else{
                 Util.generarAlertaError("DEMASIADAS PREGUNTAS", "¡Nunca terminaríamos de jugar si escoges un número tan grande!");
@@ -123,18 +148,27 @@ public class DashboardController implements Initializable {
         }
     }
     
+    
+    
+    
+   
+    
+    
     private void fnGame(){
         btnYes.setOnAction(e -> {
             // Aquí van acciones
             Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
+            respuestasUsuario.add("si");
         });
         
         btnNo.setOnAction(e -> {
             // Aquí van acciones
             Util.generarAlertaError("Prueba y error", "Prueba de presionar No");
+            respuestasUsuario.add("no");
         });
     }
-
+    
+//
     @FXML
     private void fnMachinePlay(MouseEvent event) {
     }
