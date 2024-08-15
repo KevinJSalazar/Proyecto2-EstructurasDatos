@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class CrearArbol {
     
-    public static void crearArbolDeDecisiones(ArbolBinario<String> arbol, ArrayList<String> preguntas, int indice) {
+    public static void crearArbolDeDecisiones(ArbolBinario<String> arbol, List<String> preguntas, int indice) {
         if(indice >= preguntas.size()) {
             return;
         }
