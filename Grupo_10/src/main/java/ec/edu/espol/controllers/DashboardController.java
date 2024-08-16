@@ -9,6 +9,7 @@ import ec.edu.espol.grupo_10_iiparcial.CrearArbol;
 import ec.edu.espol.util.Util;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -35,11 +36,13 @@ public class DashboardController implements Initializable {
     private File imgFile;
     private MediaPlayer mediaPlayer;
     private int nQuestions;
+    private int contador = 0;
 
     private List<String> respuestasUsuario;
     private List<String> preguntasJuego;
     private HashMap<String, List<String>> respuestasJuego;
     private ArbolBinario arbol;
+    private List<String> preguntasRealizadas;
     private List<String> posiblesRespuestas;
     // 
     
@@ -59,10 +62,6 @@ public class DashboardController implements Initializable {
     private ImageView imvAnswers;
     @FXML
     private Label lblQuestions;
-    @FXML
-    private Button btnYes;
-    @FXML
-    private Button btnNo;
     @FXML
     private AnchorPane GameOverSection;
     @FXML
@@ -96,7 +95,8 @@ public class DashboardController implements Initializable {
         preguntasJuego = CrearArbol.leerPreguntas();
         respuestasJuego = CrearArbol.leerRespuestas();
         
-        respuestasUsuario = CrearArbol.crearListaRespuesta(preguntasJuego.size()+1);
+        preguntasRealizadas = new ArrayList<String>();
+        respuestasUsuario = CrearArbol.crearListaRespuesta(preguntasJuego.size());
         
         arbol = new ArbolBinario<String>(preguntasJuego.get(0));
         CrearArbol.crearArbolDeDecisiones(arbol, preguntasJuego, 1);
@@ -131,7 +131,7 @@ public class DashboardController implements Initializable {
     private void fnPlayAgain(MouseEvent event) {
         String nUser = (String) txtNQuestions.getText();   
         if(Util.verificacionesNumericas(nUser)){
-            if(Util.verificarMax(nUser, 20)){
+            if(Util.verificarMax(nUser, preguntasJuego.size())){
                 if(Util.generarAlertaConfirmacion("EMPEZAR A JUGAR", "¿De verdad? ¡Asegúrate de haber ingresado el número correcto!")){
                     PlayScreen.setVisible(true);
                     MainScreen.setVisible(false);
@@ -150,14 +150,7 @@ public class DashboardController implements Initializable {
                     }
 
                     nQuestions = Integer.parseInt(nUser);
-                    for(int i = 0; i < nQuestions; i++){
-                        int ind = new Random().nextInt(preguntasJuego.size());
-                        String preg = preguntasJuego.get(ind);
-                        lblQuestions.setText(preg);
-                        fnGame(preg);
-                    }
-                    posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario, 0);
-                    lblQuestions.setText(posiblesRespuestas.get(1));
+                    jugar();
                 }
             } else{
                 Util.generarAlertaError("DEMASIADAS PREGUNTAS", "¡Nunca terminaríamos de jugar si escoges un número tan grande!");
@@ -167,23 +160,71 @@ public class DashboardController implements Initializable {
         }
     }
     
-    private void fnGame(String pregunta){
-        btnYes.setOnAction(e -> {
-//            Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
-            int id = CrearArbol.getIndicePregunta(preguntasJuego, pregunta);
-            respuestasUsuario.set(id, "si");
-        });
-        
-        btnNo.setOnAction(e -> {
-//            Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
-            int id = CrearArbol.getIndicePregunta(preguntasJuego, pregunta);
-            respuestasUsuario.set(id, "no");
-        });
+    private void jugar(){
+        if(contador == nQuestions)
+           acabarjuego();
+        else{
+            String preguntaElegida;
+            do{
+                preguntaElegida = preguntasJuego.get(new Random().nextInt(preguntasJuego.size()));
+            } while(preguntasRealizadas.contains(preguntaElegida));
+            preguntasRealizadas.add(preguntaElegida);
+            lblQuestions.setText(preguntaElegida);
+        }
     }
     
-//
+    private void seguirJugando(){
+        contador++;
+        jugar();
+    }
+    
+    private void acabarjuego(){
+        posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario, 0);
+        StringBuilder sb = new StringBuilder();
+        for(String animal : posiblesRespuestas)
+            sb.append(animal + ", ");
+        lblQuestions.setText(sb.toString());
+        Util.generarAlertaError("Final de juego", "¿Adiviné?");
+        clear();
+        //Poner pantalla de final de juego y mostrar el animal o animales resultantes.
+    }
+    
+    @FXML
+    private void btnYes(MouseEvent event) {
+        int id = CrearArbol.getIndicePregunta(preguntasJuego, lblQuestions.getText());
+        respuestasUsuario.set(id, "si");
+        seguirJugando();
+    }
+
+    @FXML
+    private void btnNo(MouseEvent event) {
+        int id = CrearArbol.getIndicePregunta(preguntasJuego, lblQuestions.getText());
+        respuestasUsuario.set(id, "no");
+        seguirJugando();
+    }
+
+    @FXML
+    private void btnNoSe(MouseEvent event) {
+        seguirJugando();
+    }
+    
+//    private void fnGame(String pregunta){
+//        btnYes.setOnAction(e -> {
+////            Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
+//            int id = CrearArbol.getIndicePregunta(preguntasJuego, pregunta);
+//            respuestasUsuario.set(id, "si");
+//        });
+//        btnNo.setOnAction(e -> {
+////            Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
+//            int id = CrearArbol.getIndicePregunta(preguntasJuego, pregunta);
+//            respuestasUsuario.set(id, "no");
+//        });
+//        respondido = true;
+//    }
+
     @FXML
     private void fnMachinePlay(MouseEvent event) {
+        fnMachineGame(event);
     }
 
     @FXML
@@ -192,11 +233,39 @@ public class DashboardController implements Initializable {
         MainScreen.setVisible(true);
         SecondScreen.setVisible(false);
         PlayScreen.setVisible(false);
-        
     }
 
     @FXML
     private void fnMachineGame(MouseEvent event) {
+//        String nUser = (String) txtNQuestions.getText();   
+//        if(Util.verificacionesNumericas(nUser)){
+//            if(Util.verificarMax(nUser, preguntasJuego.size())){
+//                if(Util.generarAlertaConfirmacion("EMPEZAR A JUGAR", "¿De verdad? ¡Asegúrate de haber ingresado el número correcto!")){
+//                    PlayScreen.setVisible(true);
+//                    MainScreen.setVisible(false);
+//                    SecondScreen.setVisible(false);
+//
+//                    if (mediaPlayer != null) {
+//                        mediaPlayer.stop(); 
+//                        mediaPlayer.dispose(); 
+//                    }
+//
+//                    mediaPlayer = Util.initMediaPlayer("PistaJuego.mp3");
+//
+//                    if (mediaPlayer != null) {
+//                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//                        mediaPlayer.play();
+//                    }
+//
+//                    nQuestions = Integer.parseInt(nUser);
+//                    jugar();
+//                }
+//            } else{
+//                Util.generarAlertaError("DEMASIADAS PREGUNTAS", "¡Nunca terminaríamos de jugar si escoges un número tan grande!");
+//            }
+//        } else{
+//            Util.generarAlertaError("INGRESO INVÁLIDO", "¡Vamos, no podremos jugar si no te lo tomas en serio!");
+//        }
     }
 
     @FXML
@@ -222,8 +291,11 @@ public class DashboardController implements Initializable {
     }
     
     public void clear(){
-        lblQuestions.setText("Hola, debo ser una pregunta.");
+//        lblQuestions.setText("");
         txtNQuestions.setText("");
         nQuestions = 0;
-    }   
+        contador = 0;
+        respuestasUsuario = CrearArbol.crearListaRespuesta(preguntasJuego.size());
+        preguntasRealizadas = new ArrayList<>();
+    }
 }

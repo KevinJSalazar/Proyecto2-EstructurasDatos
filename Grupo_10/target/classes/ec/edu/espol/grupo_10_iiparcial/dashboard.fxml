@@ -112,12 +112,17 @@
                   <Font name="Tw Cen MT" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="btnYes" layoutX="397.0" layoutY="288.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="Sí" textFill="WHITE">
+            <Button layoutX="397.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#btnYes" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="Sí" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnNo" layoutX="520.0" layoutY="288.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No" textFill="WHITE">
+            <Button layoutX="520.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#btnNo" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="459.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#btnNoSe" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No sé" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
