@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -50,9 +51,11 @@ public class DashboardController implements Initializable {
     private List<String> posiblesRespuestas;
     
     private ObservableList<String> preguntasCbx;
-    private ArrayList<String> copia;
+    private ArrayList<String> copiaPreguntasCbx;
     
     private String selection;
+    private String animalEscogioMaquina;
+    private List<String> respuestasMaquina;
     // 
     
     @FXML
@@ -134,14 +137,15 @@ public class DashboardController implements Initializable {
         arbol = new ArbolBinario<String>(preguntasJuego.get(0));
         CrearArbol.crearArbolDeDecisiones(arbol, preguntasJuego, 1);
         CrearArbol.añadirAnimales(arbol, respuestasJuego);
+        respuestasJuego = CrearArbol.leerRespuestas();
         
-        copia = new ArrayList<>(preguntasJuego);
+        copiaPreguntasCbx = new ArrayList<>(preguntasJuego);
         
 //        preguntasCbx = FXCollections.observableArrayList(copia);
         
-        if(!copia.isEmpty()){
+        if(!copiaPreguntasCbx.isEmpty()){
             
-            llenarComboBox(copia);
+            llenarComboBox(copiaPreguntasCbx);
             do{
                 nMachineQuestions = new Random().nextInt(preguntasJuego.size() + 1);
             } while(nMachineQuestions == 1);
@@ -301,6 +305,29 @@ public class DashboardController implements Initializable {
         SecondScreen.setVisible(false);
         PlayScreen.setVisible(false);
         
+        int ind = new Random().nextInt(respuestasJuego.keySet().size());
+        int ind2 = 0;
+        for(Map.Entry<String, List<String>> entrada : respuestasJuego.entrySet()){
+            ind2++;
+            if(ind2 == ind){
+                animalEscogioMaquina = entrada.getKey();
+                respuestasMaquina = entrada.getValue();
+            }
+        }
+        
+//        List<String> animales = new ArrayList<String>(respuestasJuego.keySet());
+//        animalEscogioMaquina = animales.get(new Random().nextInt(animales.size()));
+//        for(String anim : respuestasJuego.keySet()){
+//            if(anim.equals(animalEscogioMaquina))
+//                respuestasMaquina = respuestasJuego.get(anim);
+//        }
+//        for(String anim : respuestasJuego.keySet()){
+//            System.out.println(anim);
+//        }
+//        System.out.println(animalEscogioMaquina);
+//        for(String resp : respuestasMaquina){
+//            System.out.println(resp);
+//        }
         lblMachineQuestions.setText(nMachineQuestions + " preguntas");
         
         cbxQuestions.setOnAction(eh->{
@@ -308,6 +335,7 @@ public class DashboardController implements Initializable {
         });
         
         lblMachineAnswer.setText("MI RESPUESTA");
+        
         
 
 //            while(nMachineQuestions == 1){
@@ -389,11 +417,11 @@ public class DashboardController implements Initializable {
         respuestasUsuario = CrearArbol.crearListaRespuesta(preguntasJuego.size());
         preguntasRealizadas = new ArrayList<>();
         
-        copia = new ArrayList<>(preguntasJuego);
+        copiaPreguntasCbx = new ArrayList<>(preguntasJuego);
         
-        if(!copia.isEmpty()){
+        if(!copiaPreguntasCbx.isEmpty()){
             
-            llenarComboBox(copia);
+            llenarComboBox(copiaPreguntasCbx);
             do{
                 nMachineQuestions = new Random().nextInt(preguntasJuego.size());
             } while(nMachineQuestions == 0 || nMachineQuestions == 1);
@@ -460,10 +488,15 @@ public class DashboardController implements Initializable {
     private void fnPreguntar(MouseEvent event) {
         if(nMachineQuestions != 0){
             if(!selection.equals("Elija su pregunta")){
+                lblSelection.setText(selection);
+                lblMachineAnswer.setText(respuestasMaquina.get(CrearArbol.getIndicePregunta(preguntasJuego, selection)));
                 nMachineQuestions--;
-                lblSelection.setText(selection);               
                 lblMachineQuestions.setText(nMachineQuestions + " preguntas");
                 cbxQuestions.getItems().remove(selection);
+                if(nMachineQuestions == 0){
+                    cbxQuestions.setDisable(true);
+                    btnPreguntar.setText("Ver respuesta");
+                }
             } else{
                 Util.generarAlertaError("Selección pendiente", "Debes seleccionar una pregunta");                
             }
@@ -473,6 +506,8 @@ public class DashboardController implements Initializable {
             lblSelection.setText("");
             btnPreguntar.setDisable(true);
             cbxQuestions.setDisable(true);
+            lblMachineAnswer.setText(animalEscogioMaquina);
         }
+        
     }
 }
