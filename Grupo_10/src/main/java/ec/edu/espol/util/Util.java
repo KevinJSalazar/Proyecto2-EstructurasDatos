@@ -5,6 +5,7 @@
 package ec.edu.espol.util;
 
 import java.io.File;
+import java.util.List;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -93,6 +94,29 @@ public class Util {
         alerta.setTitle(titulo.toUpperCase());
         alerta.setHeaderText(null);
         alerta.show();
+    }
+    
+    public static void generarAlertaInfo(String titulo, String mensaje){
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION, mensaje);
+        alerta.setTitle(titulo.toUpperCase());
+        alerta.setHeaderText(null);
+        alerta.show();
+    }
+    
+    public static String resultado(List<String> resultados){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < resultados.size(); i++){
+            if(i == resultados.size()-1)
+                sb.append(resultados.get(i));
+            else
+                sb.append(resultados.get(i) + ", ");
+        }
+        
+        return sb.toString();      
+    }
+    
+    public static boolean confirmarTamaño(List<String> resultados){
+        return resultados.size() > 1;
     }
 
 }

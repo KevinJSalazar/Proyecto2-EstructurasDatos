@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -106,23 +107,23 @@
                   <Font name="Tw Cen MT Condensed Extra Bold" size="45.0" />
                </font>
             </Label>
-            <ImageView fx:id="imvAnswers" fitHeight="266.0" fitWidth="275.0" layoutX="37.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="lblQuestions" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="251.0" prefHeight="26.0" prefWidth="311.0" textAlignment="CENTER">
+            <ImageView fx:id="imvAnswers" fitHeight="266.0" fitWidth="275.0" layoutX="62.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblQuestions" alignment="CENTER" contentDisplay="CENTER" layoutX="347.0" layoutY="202.0" prefHeight="26.0" prefWidth="311.0" textAlignment="CENTER">
                <font>
                   <Font name="Tw Cen MT" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="397.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#btnYes" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="Sí" textFill="WHITE">
+            <Button fx:id="IDYes" layoutX="393.0" layoutY="239.0" mnemonicParsing="false" onMouseClicked="#btnYes" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="Sí" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="520.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#btnNo" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No" textFill="WHITE">
+            <Button fx:id="IDNo" layoutX="516.0" layoutY="239.0" mnemonicParsing="false" onMouseClicked="#btnNo" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="459.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#btnNoSe" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No sé" textFill="WHITE">
+            <Button fx:id="IDNs" layoutX="455.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#btnNoSe" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #191840;" text="No sé" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -137,26 +138,34 @@
                   <Font name="Tw Cen MT Condensed Extra Bold" size="45.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="GameOverSection" layoutY="388.0" prefHeight="178.0" prefWidth="700.0" visible="false">
+            <AnchorPane fx:id="GameOverSection" layoutY="369.0" prefHeight="197.0" prefWidth="700.0" visible="false">
                <children>
-                  <Button layoutX="227.0" layoutY="113.0" mnemonicParsing="false" onMouseClicked="#fnMachinePlay" prefHeight="38.0" prefWidth="246.0" style="-fx-background-color: #191840;" text="Jugar contra la máquina" textFill="#fcfcfc">
+                  <Button layoutX="233.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#fnMachinePlay" prefHeight="38.0" prefWidth="246.0" style="-fx-background-color: #191840;" text="Jugar contra la máquina" textFill="#fcfcfc">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Label layoutX="132.0" layoutY="6.0" text="¿TE ATREVES A ADIVINAR" textFill="#191840">
+                  <Label layoutX="163.0" layoutY="35.0" text="¿TE ATREVES A ADIVINAR" textFill="#191840">
                      <font>
-                        <Font name="Tw Cen MT Condensed Extra Bold" size="45.0" />
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="40.0" />
                      </font>
                   </Label>
-                  <Label layoutX="120.0" layoutY="50.0" text="LO QUE ESTOY PENSANDO?" textFill="#191840">
+                  <Label layoutX="152.0" layoutY="79.0" text="LO QUE ESTOY PENSANDO?" textFill="#191840">
                      <font>
-                        <Font name="Tw Cen MT Condensed Extra Bold" size="45.0" />
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="40.0" />
                      </font>
                   </Label>
-                  <Label layoutX="366.0" layoutY="50.0" text="PENSANDO?" textFill="#d41441">
+                  <Label layoutX="372.0" layoutY="80.0" text="PENSANDO?" textFill="#d41441">
                      <font>
-                        <Font name="Tw Cen MT Condensed Extra Bold" size="45.0" />
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="152.0" layoutY="4.0" text="- - - - - - - - - - - - - - - - - - - Ahora es tu turno - - - - - - - - - - - - - - - - - - -">
+                     <font>
+                        <Font name="Tw Cen MT" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -210,6 +219,60 @@
                   <Font size="39.0" />
                </font>
             </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="MachineGameScreen" layoutY="40.0" prefHeight="568.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label layoutX="65.0" layoutY="40.0" text="VEAMOS DE QUÉ">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="71.0" text="ESTÁS HECHO,">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="100.0" text="HUMANO" textFill="#2e3158">
+               <font>
+                  <Font name="Sylfaen" size="33.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imvMachine" fitHeight="402.0" fitWidth="306.0" layoutX="344.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblTexto1" layoutX="65.0" layoutY="155.0" text="He decidido que podrás hacerme">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMachineQuestions" layoutX="65.0" layoutY="172.0" textFill="RED">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbxQuestions" layoutX="65.0" layoutY="221.0" prefWidth="150.0" />
+            <Label fx:id="lblSelection" layoutX="65.0" layoutY="338.0">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="376.0" text="La respuesta a tu pregunta es:">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMachineAnswer" alignment="CENTER" layoutX="65.0" layoutY="398.0" textFill="#2c0889">
+               <font>
+                  <Font name="Tw Cen MT" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnPreguntar" layoutX="65.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#fnPreguntar" prefHeight="28.0" prefWidth="150.0" style="-fx-background-color: #2e3158;" text="Enviar pregunta" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
    </children>
