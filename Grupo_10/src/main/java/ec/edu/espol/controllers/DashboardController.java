@@ -102,6 +102,8 @@ public class DashboardController implements Initializable {
     private Label lblTexto1;
     @FXML
     private Button btnPreguntar;
+    @FXML
+    private Label lblTexto2;
     
 
     
@@ -125,7 +127,7 @@ public class DashboardController implements Initializable {
         
         mediaPlayer = Util.initMediaPlayer("pistaConsola.mp3");
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.setVolume(0.2);
+        mediaPlayer.setVolume(0.03);
         mediaPlayer.play();
 
         preguntasJuego = CrearArbol.leerPreguntas();
@@ -148,7 +150,7 @@ public class DashboardController implements Initializable {
             llenarComboBox(copiaPreguntasCbx);
             do{
                 nMachineQuestions = new Random().nextInt(preguntasJuego.size() + 1);
-            } while(nMachineQuestions == 1);
+            } while(nMachineQuestions == 0 || nMachineQuestions == 1);
         }
     }    
 
@@ -167,15 +169,15 @@ public class DashboardController implements Initializable {
         PlayScreen.setVisible(false);
         MachineGameScreen.setVisible(false);
         
-//        if (mediaPlayer != null) {
-//            mediaPlayer.stop();
-//            mediaPlayer.dispose();
-//        }
-//        
-//        mediaPlayer = Util.initMediaPlayer("Pista.mp3");
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.setVolume(0.2);
-//        mediaPlayer.play();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+        }
+        
+        mediaPlayer = Util.initMediaPlayer("Pista.mp3");
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.setVolume(0.03);
+        mediaPlayer.play();
     }
 
     @FXML
@@ -189,18 +191,18 @@ public class DashboardController implements Initializable {
                     SecondScreen.setVisible(false);
                     MachineGameScreen.setVisible(false);
 
-//                    if (mediaPlayer != null) {
-//                        mediaPlayer.stop(); 
-//                        mediaPlayer.dispose(); 
-//                    }
-//
-//                    mediaPlayer = Util.initMediaPlayer("PistaJuego.mp3");
-//
-//                    if (mediaPlayer != null) {
-//                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//                        mediaPlayer.setVolume(0.2);
-//                        mediaPlayer.play();
-//                    }
+                    if (mediaPlayer != null) {
+                        mediaPlayer.stop(); 
+                        mediaPlayer.dispose(); 
+                    }
+
+                    mediaPlayer = Util.initMediaPlayer("PistaJuego.mp3");
+
+                    if (mediaPlayer != null) {
+                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                        mediaPlayer.setVolume(0.03);
+                        mediaPlayer.play();
+                    }
 
                     nQuestions = Integer.parseInt(nUser);
                     jugar();
@@ -304,6 +306,20 @@ public class DashboardController implements Initializable {
         MainScreen.setVisible(false);
         SecondScreen.setVisible(false);
         PlayScreen.setVisible(false);
+        btnPreguntar.setDisable(true);
+        
+         if (mediaPlayer != null) {
+                        mediaPlayer.stop(); 
+                        mediaPlayer.dispose(); 
+                    }
+
+                    mediaPlayer = Util.initMediaPlayer("pistaReto.mp3");
+
+                    if (mediaPlayer != null) {
+                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                        mediaPlayer.setVolume(0.03);
+                        mediaPlayer.play();
+                    }
         
         int ind = new Random().nextInt(respuestasJuego.keySet().size());
         int ind2 = 0;
@@ -332,9 +348,15 @@ public class DashboardController implements Initializable {
         
         cbxQuestions.setOnAction(eh->{
             selection = cbxQuestions.getSelectionModel().getSelectedItem();
+            if(selection != null){
+                btnPreguntar.setDisable(false);
+            }
         });
         
-        lblMachineAnswer.setText("MI RESPUESTA");
+        lblTexto2.setVisible(false);
+        lblMachineAnswer.setText("");
+        
+        
         
         
 
@@ -382,12 +404,10 @@ public class DashboardController implements Initializable {
 //        }
     }
 
-    @FXML
-    private void fnAddAnimal(MouseEvent event) {
-    }
 
     @FXML
     private void fnReturn(MouseEvent event) {
+        
         PlayZoneScreen.setVisible(true);
         MainScreen.setVisible(false);
         SecondScreen.setVisible(false);
@@ -404,19 +424,12 @@ public class DashboardController implements Initializable {
         
         mediaPlayer = Util.initMediaPlayer("pistaConsola.mp3");
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.setVolume(0.2);
+        mediaPlayer.setVolume(0.03);
         mediaPlayer.play();
     }
     
     public void clear(){
 //        lblQuestions.setText("");
-        habilitarBtns();
-        txtNQuestions.setText("");
-        nQuestions = 0;
-        contador = 0;
-        respuestasUsuario = CrearArbol.crearListaRespuesta(preguntasJuego.size());
-        preguntasRealizadas = new ArrayList<>();
-        
         copiaPreguntasCbx = new ArrayList<>(preguntasJuego);
         
         if(!copiaPreguntasCbx.isEmpty()){
@@ -427,10 +440,21 @@ public class DashboardController implements Initializable {
             } while(nMachineQuestions == 0 || nMachineQuestions == 1);
         }
         
+        habilitarBtns();
+        txtNQuestions.setText("");
+        nQuestions = 0;
+        contador = 0;
+        respuestasUsuario = CrearArbol.crearListaRespuesta(preguntasJuego.size());
+        preguntasRealizadas = new ArrayList<>();
+        
+        
+        
         lblTexto1.setText("He decidido que podrás hacerme");
+        lblTexto2.setText("La respuesta a tu pregunta es:");
         lblMachineQuestions.setText("");
         lblMachineAnswer.setText("");
         cbxQuestions.setDisable(false);
+        btnPreguntar.setText("Enviar pregunta");
         btnPreguntar.setDisable(false);
         
     }
@@ -486,14 +510,26 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void fnPreguntar(MouseEvent event) {
+        
+        lblTexto2.setVisible(true);
         if(nMachineQuestions != 0){
             if(!selection.equals("Elija su pregunta")){
                 lblSelection.setText(selection);
                 lblMachineAnswer.setText(respuestasMaquina.get(CrearArbol.getIndicePregunta(preguntasJuego, selection)));
+                
                 nMachineQuestions--;
-                lblMachineQuestions.setText(nMachineQuestions + " preguntas");
+                
+                if(nMachineQuestions != 1){
+                    lblTexto1.setText("No es por asustarte pero ahora te quedan");
+                    lblMachineQuestions.setText(nMachineQuestions + " preguntas");
+                } else{
+                    lblTexto1.setText("Uy, es tarde, te queda");
+                    lblMachineQuestions.setText(nMachineQuestions + "pregunta");
+                }
                 cbxQuestions.getItems().remove(selection);
                 if(nMachineQuestions == 0){
+                    lblTexto1.setText("Es una lástima,");
+                    lblMachineQuestions.setText("ya no te quedan más preguntas.");
                     cbxQuestions.setDisable(true);
                     btnPreguntar.setText("Ver respuesta");
                 }
@@ -501,11 +537,14 @@ public class DashboardController implements Initializable {
                 Util.generarAlertaError("Selección pendiente", "Debes seleccionar una pregunta");                
             }
         } else{
-            lblTexto1.setText("Es una lástima,");
-            lblMachineQuestions.setText("ya no te quedan más preguntas.");
+            
             lblSelection.setText("");
+            
             btnPreguntar.setDisable(true);
             cbxQuestions.setDisable(true);
+            lblTexto1.setText("Sé sincero conmigo,");
+            lblMachineQuestions.setText("dime si adivinaste");
+            lblTexto2.setText("El animal que pensé era");
             lblMachineAnswer.setText(animalEscogioMaquina);
         }
         

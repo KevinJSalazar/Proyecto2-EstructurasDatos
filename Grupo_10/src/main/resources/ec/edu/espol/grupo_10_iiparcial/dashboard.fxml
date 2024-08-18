@@ -190,7 +190,7 @@
                   <Font name="Snap ITC" size="57.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" layoutX="420.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#fnSafariQuestions" prefHeight="38.0" prefWidth="213.0" style="-fx-background-color: #2e3158;" text="Safari de preguntas" textFill="WHITE">
+            <Button alignment="CENTER" layoutX="420.0" layoutY="255.0" mnemonicParsing="false" onMouseClicked="#fnSafariQuestions" prefHeight="38.0" prefWidth="213.0" style="-fx-background-color: #2e3158;" text="Safari de preguntas" textFill="WHITE">
                <font>
                   <Font name="Tw Cen MT" size="21.0" />
                </font>
@@ -198,15 +198,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="CENTER" layoutX="420.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#fnMachineGame" prefHeight="38.0" prefWidth="213.0" style="-fx-background-color: #e70041;" text="Desafía a la máquina" textFill="WHITE">
-               <font>
-                  <Font name="Tw Cen MT" size="21.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button alignment="CENTER" layoutX="419.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#fnAddAnimal" prefHeight="38.0" prefWidth="213.0" style="-fx-background-color: #2e3158;" text="Agrega tu animal" textFill="WHITE">
+            <Button alignment="CENTER" layoutX="420.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#fnMachineGame" prefHeight="38.0" prefWidth="213.0" style="-fx-background-color: #e70041;" text="Desafía a la máquina" textFill="WHITE">
                <font>
                   <Font name="Tw Cen MT" size="21.0" />
                </font>
@@ -217,6 +209,18 @@
             <Label layoutX="159.0" layoutY="35.0" prefHeight="56.0" prefWidth="59.0" text="🎮" textFill="#e40035db">
                <font>
                   <Font size="39.0" />
+               </font>
+            </Label>
+            <Label layoutX="157.0" layoutY="454.0" text="┏━━━━━━━━━━━━•(=^●ω●^=)•━━━━━━━━━━━━┓" />
+            <Label layoutX="157.0" layoutY="508.0" text="┗━━━━━━━━━━━━•(=^●ω●^=)•━━━━━━━━━━━━┛" />
+            <Label layoutX="188.0" layoutY="478.0" text="Creado por">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="278.0" layoutY="478.0" text="un grupo de politécnicos en crisis" textFill="RED">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
                </font>
             </Label>
          </children>
@@ -255,7 +259,7 @@
                   <Font name="Tw Cen MT" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="376.0" text="La respuesta a tu pregunta es:">
+            <Label fx:id="lblTexto2" layoutX="65.0" layoutY="376.0" text="La respuesta a tu pregunta es:">
                <font>
                   <Font name="Tw Cen MT" size="18.0" />
                </font>
