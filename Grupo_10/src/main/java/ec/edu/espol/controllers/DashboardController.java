@@ -238,9 +238,12 @@ public class DashboardController implements Initializable {
         posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario, 0);
         String resultado = Util.resultado(posiblesRespuestas);
         if(Util.confirmarTamaño(posiblesRespuestas)){
-            Util.generarAlertaInfo("¡No he llegado a una única respuesta :c!", resultado);
-        } else{
-            Util.generarAlertaInfo("¡Creo que he adivinado correctamente!", resultado);
+            Util.generarAlertaInfo("¡No he llegado a una única respuesta :c!", "Has pensado en uno de estos animales: "+resultado);
+        }else if(resultado.length()==0){
+            Util.generarAlertaInfo("¡¡No conozco un animal con esas características :0!!", "Tu ganas :(");
+        }
+        else{
+            Util.generarAlertaInfo("¡Creo que he adivinado correctamente!","Has pensado en: "+ resultado);
         }
         
         GameOverSection.setVisible(true);
