@@ -237,15 +237,17 @@ public class DashboardController implements Initializable {
         deshabilitarBtns();
         posiblesRespuestas = arbol.respuestasPorRecorrido(respuestasUsuario, 0);
         String resultado = Util.resultado(posiblesRespuestas);
-        if(Util.confirmarTamaño(posiblesRespuestas)){
-            Util.generarAlertaInfo("¡No he llegado a una única respuesta :c!", "Has pensado en uno de estos animales: "+resultado);
-        }else if(resultado.length()==0){
-            Util.generarAlertaInfo("¡¡No conozco un animal con esas características :0!!", "Tu ganas :(");
+        if(posiblesRespuestas.isEmpty()){
+            lblQuestions.setText("Intenta con otro animal...");
+            Util.generarAlertaInfo("No encontré nada", "No sé de ningún animal con esas características.");
+        } else{
+                lblQuestions.setText("¿He adivinado?");
+            if(Util.confirmarTamaño(posiblesRespuestas)){
+                Util.generarAlertaInfo("¡No he llegado a una única respuesta :c!", "Creo que podría ser uno de estos animales: " + resultado);
+            } else{
+                Util.generarAlertaInfo("¡Creo que he adivinado correctamente!", "El animal en el que pensaste fue: " + resultado);
+            }
         }
-        else{
-            Util.generarAlertaInfo("¡Creo que he adivinado correctamente!","Has pensado en: "+ resultado);
-        }
-        
         GameOverSection.setVisible(true);
     }
     
@@ -358,8 +360,8 @@ public class DashboardController implements Initializable {
             
             llenarComboBox(copiaPreguntasCbx);
             do{
-                nMachineQuestions = new Random().nextInt(preguntasJuego.size());
-            } while(nMachineQuestions == 0 || nMachineQuestions == 1);
+                nMachineQuestions = new Random().nextInt(preguntasJuego.size())+1;
+            } while(nMachineQuestions < 2);
         }
         
         habilitarBtns();
