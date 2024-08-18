@@ -2,6 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
 package ec.edu.espol.controllers;
 
 import ec.edu.espol.grupo_10_iiparcial.ArbolBinario;
@@ -137,20 +141,16 @@ public class DashboardController implements Initializable {
         respuestasUsuario = CrearArbol.crearListaRespuesta(preguntasJuego.size());
         
         arbol = new ArbolBinario<String>(preguntasJuego.get(0));
-        CrearArbol.crearArbolDeDecisiones(arbol, preguntasJuego, 1);
-        CrearArbol.añadirAnimales(arbol, respuestasJuego);
+        CrearArbol.crearArbolDeDecisiones(arbol, respuestasJuego);
         respuestasJuego = CrearArbol.leerRespuestas();
         
         copiaPreguntasCbx = new ArrayList<>(preguntasJuego);
         
-//        preguntasCbx = FXCollections.observableArrayList(copia);
-        
         if(!copiaPreguntasCbx.isEmpty()){
-            
             llenarComboBox(copiaPreguntasCbx);
             do{
-                nMachineQuestions = new Random().nextInt(preguntasJuego.size() + 1);
-            } while(nMachineQuestions == 0 || nMachineQuestions == 1);
+                nMachineQuestions = new Random().nextInt(preguntasJuego.size()) + 1;
+            } while(nMachineQuestions < 2);
         }
     }    
 
@@ -244,8 +244,6 @@ public class DashboardController implements Initializable {
         }
         
         GameOverSection.setVisible(true);
-//        clear();
-        //Poner pantalla de final de juego y mostrar el animal o animales resultantes.
     }
     
     @FXML
@@ -266,20 +264,6 @@ public class DashboardController implements Initializable {
     private void btnNoSe(MouseEvent event) {
         seguirJugando();
     }
-    
-//    private void fnGame(String pregunta){
-//        btnYes.setOnAction(e -> {
-////            Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
-//            int id = CrearArbol.getIndicePregunta(preguntasJuego, pregunta);
-//            respuestasUsuario.set(id, "si");
-//        });
-//        btnNo.setOnAction(e -> {
-////            Util.generarAlertaError("Prueba y error", "Prueba de presionar Sí");
-//            int id = CrearArbol.getIndicePregunta(preguntasJuego, pregunta);
-//            respuestasUsuario.set(id, "no");
-//        });
-//        respondido = true;
-//    }
 
     @FXML
     private void fnMachinePlay(MouseEvent event) {
@@ -308,19 +292,18 @@ public class DashboardController implements Initializable {
         PlayScreen.setVisible(false);
         btnPreguntar.setDisable(true);
         
-         if (mediaPlayer != null) {
-                        mediaPlayer.stop(); 
-                        mediaPlayer.dispose(); 
-                    }
+        if (mediaPlayer != null) {
+            mediaPlayer.stop(); 
+            mediaPlayer.dispose(); 
+        }
 
-                    mediaPlayer = Util.initMediaPlayer("pistaReto.mp3");
+        mediaPlayer = Util.initMediaPlayer("pistaReto.mp3");
 
-                    if (mediaPlayer != null) {
-                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                        mediaPlayer.setVolume(0.03);
-                        mediaPlayer.play();
-                    }
-        
+        if (mediaPlayer != null) {
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.setVolume(0.03);
+            mediaPlayer.play();
+        }
         int ind = new Random().nextInt(respuestasJuego.keySet().size());
         int ind2 = 0;
         for(Map.Entry<String, List<String>> entrada : respuestasJuego.entrySet()){
@@ -330,20 +313,6 @@ public class DashboardController implements Initializable {
                 respuestasMaquina = entrada.getValue();
             }
         }
-        
-//        List<String> animales = new ArrayList<String>(respuestasJuego.keySet());
-//        animalEscogioMaquina = animales.get(new Random().nextInt(animales.size()));
-//        for(String anim : respuestasJuego.keySet()){
-//            if(anim.equals(animalEscogioMaquina))
-//                respuestasMaquina = respuestasJuego.get(anim);
-//        }
-//        for(String anim : respuestasJuego.keySet()){
-//            System.out.println(anim);
-//        }
-//        System.out.println(animalEscogioMaquina);
-//        for(String resp : respuestasMaquina){
-//            System.out.println(resp);
-//        }
         lblMachineQuestions.setText(nMachineQuestions + " preguntas");
         
         cbxQuestions.setOnAction(eh->{
@@ -352,62 +321,13 @@ public class DashboardController implements Initializable {
                 btnPreguntar.setDisable(false);
             }
         });
-        
         lblTexto2.setVisible(false);
         lblMachineAnswer.setText("");
-        
-        
-        
-        
-
-//            while(nMachineQuestions == 1){
-//                nMachineQuestions = (int) (Math.random() * copia.size() + 1);
-//            }
-
-        
-
-//            manejarSeleccion(cbxQuestions, lblSelection);
-        
-        
-        
-    
-        
-        
-//        String nUser = (String) txtNQuestions.getText();   
-//        if(Util.verificacionesNumericas(nUser)){
-//            if(Util.verificarMax(nUser, preguntasJuego.size())){
-//                if(Util.generarAlertaConfirmacion("EMPEZAR A JUGAR", "¿De verdad? ¡Asegúrate de haber ingresado el número correcto!")){
-//                    PlayScreen.setVisible(true);
-//                    MainScreen.setVisible(false);
-//                    SecondScreen.setVisible(false);
-//
-//                    if (mediaPlayer != null) {
-//                        mediaPlayer.stop(); 
-//                        mediaPlayer.dispose(); 
-//                    }
-//
-//                    mediaPlayer = Util.initMediaPlayer("PistaJuego.mp3");
-//
-//                    if (mediaPlayer != null) {
-//                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//                        mediaPlayer.play();
-//                    }
-//
-//                    nQuestions = Integer.parseInt(nUser);
-//                    jugar();
-//                }
-//            } else{
-//                Util.generarAlertaError("DEMASIADAS PREGUNTAS", "¡Nunca terminaríamos de jugar si escoges un número tan grande!");
-//            }
-//        } else{
-//            Util.generarAlertaError("INGRESO INVÁLIDO", "¡Vamos, no podremos jugar si no te lo tomas en serio!");
-//        }
     }
 
 
     @FXML
     private void fnReturn(MouseEvent event) {
-        
         PlayZoneScreen.setVisible(true);
         MainScreen.setVisible(false);
         SecondScreen.setVisible(false);
@@ -429,7 +349,6 @@ public class DashboardController implements Initializable {
     }
     
     public void clear(){
-//        lblQuestions.setText("");
         copiaPreguntasCbx = new ArrayList<>(preguntasJuego);
         
         if(!copiaPreguntasCbx.isEmpty()){
@@ -472,42 +391,12 @@ public class DashboardController implements Initializable {
     }
     
     public void llenarComboBox(List<String> preguntas){
-        
         ObservableList<String> items = FXCollections.observableArrayList(preguntas);
         items.add(0, "Elija su pregunta");
        
         cbxQuestions.setItems(items);
     }
     
-//    public void manejarSeleccion(ComboBox<String> cbx, Label lbl){
-//        cbx.setOnAction(eh ->{
-//            selection = cbx.getSelectionModel().getSelectedItem();
-//            
-//            if(!selection.equals("Elija su pregunta")){
-//                lbl.setText(selection);
-//
-////                cbx.getItems().remove(selection);
-////                preguntasCbx.remove(selection);
-//                copia.remove(selection);
-//                llenarComboBox(copia);
-////                copia.remove(selection);
-//               
-//
-//                nMachineQuestions--;
-//                lblMachineQuestions.setText(nMachineQuestions + " preguntas");
-//            }
-//            
-//            if(preguntasCbx.isEmpty() || nMachineQuestions <= 0){
-//                lblMachineQuestions.setText("Ya no puedes preguntar más.");
-//                cbx.setDisable(true);
-//            }
-//            
-//        });
-//        
-//        
-//        
-//    }
-
     @FXML
     private void fnPreguntar(MouseEvent event) {
         
@@ -547,6 +436,5 @@ public class DashboardController implements Initializable {
             lblTexto2.setText("El animal que pensé era");
             lblMachineAnswer.setText(animalEscogioMaquina);
         }
-        
     }
 }

@@ -30,8 +30,6 @@ public class Util {
         imv.setFitHeight(imv.getFitHeight());
         imv.setSmooth(true);
         imv.setImage(imagen);
-        // Ajustando imagen con el método creado :)
-//        imagen = ajustarTamañoImagen(imagen, imv.getFitWidth() ,imv.getFitHeight());
         imv.setImage(imagen);
     }
     

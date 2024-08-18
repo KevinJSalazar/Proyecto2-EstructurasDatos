@@ -1,3 +1,27 @@
-¿Es este animal un mamífero?
-¿Es este animal un carnívoro?
-¿Se para este animal en 4 patas?
+¿Este animal es real?
+¿Nace de un huevo?
+¿Es más grande que una persona?
+¿Es un gobernante del agua?
+¿Puede escupir fuego?
+¿Generalmente andan en grupos?
+¿Tiene cuernos?
+¿Es vertebrado?
+¿Este animal tiene escamas?
+¿Este animal tiene patas?
+¿Este animal tiene más de 4 patas?
+¿Es capáz de andar en 2 patas?
+¿Es un mamífero?
+¿Puede volar?
+¿Puede nadar?
+¿Es carnívoro?
+¿Es ovnívoro?
+¿Puede vivir en el agua?
+¿Lo puedes encontrar en granjas?
+¿Vive en cuevas?
+¿Es un animal doméstico?
+¿Tiene plumas?
+¿Es venenoso?
+¿Tiene dientes?
+¿Tiene cola?
+¿Puede regenerar partes de su cuerpo?
+¿Es un animal nocturno?

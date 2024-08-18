@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -16,24 +17,28 @@ import java.util.Scanner;
  */
 public class CrearArbol {
     
-    public static void crearArbolDeDecisiones(ArbolBinario<String> arbol, List<String> preguntas, int indice) {
-        if(indice >= preguntas.size()) {
-            return;
+    public static void crearArbolDeDecisiones(ArbolBinario<String> arbol, HashMap<String, List<String>> animales) {
+        for(Map.Entry<String, List<String>> entrada : animales.entrySet()){
+            crearArbolDeAnimal(arbol, entrada.getValue(), entrada.getKey());
         }
-        if(arbol.getNodoIzq() == null) {
-            arbol.addLeft(new ArbolBinario<String>(preguntas.get(indice)));
-            crearArbolDeDecisiones(arbol.getNodoIzq(), preguntas, indice + 1);
-        } if(arbol.getNodoDer() == null) {
-            arbol.addRight(new ArbolBinario<String>(preguntas.get(indice)));
-            crearArbolDeDecisiones(arbol.getNodoDer(), preguntas, indice + 1);
-        }
+//        System.out.println(arbol.recorridoPreOrden());
     }
     
-    public static void añadirAnimales(ArbolBinario<String> arbol, HashMap<String, List<String>> respuestas){
-        for(String animal : respuestas.keySet()){
-            System.out.println(animal);
-            arbol.añadirHojas(animal, respuestas.get(animal));
-            System.out.println(arbol.recorridoPreOrden());
+    public static void crearArbolDeAnimal(ArbolBinario<String> arbol, List<String> respuestas, String animal) {
+        if(respuestas.isEmpty() && arbol.esHoja()){
+            arbol.raiz.contenido = animal;
+            return;
+        }
+        String respSiNo = respuestas.remove(0);
+        if(respSiNo.equals("si")){
+            if(arbol.getNodoIzq()==null)
+                arbol.addLeft(new ArbolBinario(""));
+            crearArbolDeAnimal(arbol.getNodoIzq(), respuestas, animal);
+        }
+        if(respSiNo.equals("no")){
+            if(arbol.getNodoDer()==null)
+                arbol.addRight(new ArbolBinario(""));
+            crearArbolDeAnimal(arbol.getNodoDer(), respuestas, animal);
         }
     }
     
