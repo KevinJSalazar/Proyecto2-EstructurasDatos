@@ -14,7 +14,7 @@
 ¿Puede volar?
 ¿Puede nadar?
 ¿Es carnívoro?
-¿Es ovnívoro?
+¿Es omnívoro?
 ¿Puede vivir en el agua?
 ¿Lo puedes encontrar en granjas?
 ¿Vive en cuevas?
