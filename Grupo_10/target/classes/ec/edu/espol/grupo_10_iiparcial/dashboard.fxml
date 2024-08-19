@@ -74,12 +74,12 @@
       <AnchorPane fx:id="SecondScreen" layoutY="40.8" prefHeight="564.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
          <children>
             <ImageView fx:id="imvQuestions" fitHeight="278.0" fitWidth="253.0" layoutX="387.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="61.0" layoutY="191.0" prefHeight="24.0" prefWidth="253.0" text="Indícanos cuántas preguntas">
+            <Label layoutX="61.0" layoutY="191.0" prefHeight="24.0" prefWidth="266.0" text="podemos hacerte. El máximo">
                <font>
                   <Font name="Tw Cen MT" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="61.0" layoutY="215.0" prefHeight="24.0" prefWidth="216.0" text="podemos hacerte ₊˚⌒⌒">
+            <Label fx:id="lblCantidadPreguntas" layoutX="61.0" layoutY="215.0" prefHeight="24.0" prefWidth="275.0">
                <font>
                   <Font name="Tw Cen MT" size="22.0" />
                </font>
@@ -98,6 +98,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Label layoutX="61.0" layoutY="167.0" prefHeight="24.0" prefWidth="253.0" text="Indícanos cuántas preguntas">
+               <font>
+                  <Font name="Tw Cen MT" size="22.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="PlayScreen" layoutY="41.0" prefHeight="566.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false">

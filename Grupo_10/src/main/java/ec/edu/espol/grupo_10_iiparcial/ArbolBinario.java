@@ -100,6 +100,9 @@ public class ArbolBinario<E extends Comparable<E>>{
             posiblesRespuesta.add(this.raiz.contenido);
             return posiblesRespuesta;
         }
+        if(indice == respuestas.size()){
+            return posiblesRespuesta;
+        }
         E respSiNo = respuestas.get(indice);
         List<E> posRes = new ArrayList<E>();
         if(respSiNo.equals("si") && this.raiz.izq!=null)

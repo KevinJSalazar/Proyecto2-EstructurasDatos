@@ -108,6 +108,8 @@ public class DashboardController implements Initializable {
     private Button btnPreguntar;
     @FXML
     private Label lblTexto2;
+    @FXML
+    private Label lblCantidadPreguntas;
     
 
     
@@ -145,6 +147,7 @@ public class DashboardController implements Initializable {
         respuestasJuego = CrearArbol.leerRespuestas();
         
         copiaPreguntasCbx = new ArrayList<>(preguntasJuego);
+        lblCantidadPreguntas.setText("son " + preguntasJuego.size() + " preguntas.");
         
         if(!copiaPreguntasCbx.isEmpty()){
             llenarComboBox(copiaPreguntasCbx);
@@ -208,7 +211,8 @@ public class DashboardController implements Initializable {
                     jugar();
                 }
             } else{
-                Util.generarAlertaError("DEMASIADAS PREGUNTAS", "¡Nunca terminaríamos de jugar si escoges un número tan grande!");
+                String mensaje = "Puedes elegir un máximo de " + preguntasJuego.size() + " preguntas.";
+                Util.generarAlertaError("DEMASIADAS PREGUNTAS", "¡Nunca terminaríamos de jugar si escoges un número tan grande! " + mensaje);
             }
         } else{
             Util.generarAlertaError("INGRESO INVÁLIDO", "¡Vamos, no podremos jugar si no te lo tomas en serio!");
@@ -377,6 +381,7 @@ public class DashboardController implements Initializable {
         lblTexto2.setText("La respuesta a tu pregunta es:");
         lblMachineQuestions.setText("");
         lblMachineAnswer.setText("");
+        lblSelection.setText("");
         cbxQuestions.setDisable(false);
         btnPreguntar.setText("Enviar pregunta");
         btnPreguntar.setDisable(false);
